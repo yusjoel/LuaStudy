@@ -7,7 +7,8 @@
 * 安装Lua Debug, actboy168, v1.28.1
 * 在设置中选择Lua的版本, 默认是5.3
 * 可以直接运行或者调试
-* 安装Lua, sumneko, v0.21.6
+* 安装Lua, sumneko, v0.21.6, 用于语法补全
+* 安装vscode-lua-format, Koihik, v1.3.6, 用于代码格式化
 ## 教学
 * [官方手册](https://www.lua.org/manual/5.4/manual.html)
 * [菜鸟教程](https://www.runoob.com/lua)
