@@ -74,7 +74,8 @@ print(substrings[2])
 -- Lua
 
 -- trim
-local function trim(s) 
+local function trim(s)
+    -- [?] 这个括号把gsub返回的第二个值取消掉了
     return (string.gsub(s, "^%s*(.-)%s*$", "%1"))
 end
 
