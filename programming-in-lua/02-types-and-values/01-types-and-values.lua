@@ -33,9 +33,9 @@
       语法糖(syntactic sugar)
         a['x'] => a.x
       起始值是1, 但索引可以是任何值, 如负数, 0
- 
+
     function:
-      第一类值(First Class Value)
+      第一类值(first-class value)
 
     userdata:
       用于表示一种由应用程序或C语言库所创建的类型
