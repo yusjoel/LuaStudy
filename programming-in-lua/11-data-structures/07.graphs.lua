@@ -6,7 +6,7 @@ local function name2node(graph, name)
     return graph[name]
 end
 
-function findpath(curr, to, path, visited)
+local function findpath(curr, to, path, visited)
     path = path or {}
     visited = visited or {}
     if visited[curr] then -- node already visited?
@@ -27,7 +27,7 @@ function findpath(curr, to, path, visited)
     path[#path] = nil -- remove node from path
 end
 
-function readgraph(filename)
+local function readgraph(filename)
     local graph = {}
     for line in io.lines(filename) do
         -- split line in two names
