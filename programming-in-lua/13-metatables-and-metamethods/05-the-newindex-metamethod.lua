@@ -1,0 +1,5 @@
+-- 当对一个表中不存在的索引赋值时, 解释器会查找__newindex元方法
+-- 如果有这个元方法, 解释器就调用它
+-- 如果__newindex是一个表, 那么就在该表中执行赋值
+-- rawset(table: table, index: any, value: any)
+-- 允许绕过元方法进行赋值
