@@ -20,7 +20,6 @@ local function setfenv(fn, env)
     return fn
 end
 
-local log = print
 local function factory()
     return function()
         return A -- "global" a

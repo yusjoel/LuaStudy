@@ -1,0 +1,8 @@
+-- module, 仅在 <= 5.1 时才存在
+-- module(...) 相当于
+-- local modname = ...
+-- local M = {}
+-- _G[modname] = M
+-- package.loaded[modname] = M
+--  ...
+-- setfenv(1, M)
