@@ -14,7 +14,9 @@ function testAssertEvalToTrueWithTrue()
 end
 
 function testAssertEvalToTrueWithFalse()
-    lu.assertEvalToTrue(false)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToTrue, false)
+    lu.assertFalse(success)  -- Should fail because false evaluates to false
 end
 
 function testAssertEvalToTrueWithOne()
@@ -34,7 +36,9 @@ function testAssertEvalToTrueWithEmptyString()
 end
 
 function testAssertEvalToTrueWithNil()
-    lu.assertEvalToTrue(nil)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToTrue, nil)
+    lu.assertFalse(success)  -- Should fail because nil evaluates to false
 end
 
 function testAssertEvalToTrueWithTable()
@@ -54,7 +58,9 @@ end
 -- =======================================
 
 function testAssertEvalToFalseWithTrue()
-    lu.assertEvalToFalse(true)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToFalse, true)
+    lu.assertFalse(success)  -- Should fail because true evaluates to true
 end
 
 function testAssertEvalToFalseWithFalse()
@@ -62,19 +68,27 @@ function testAssertEvalToFalseWithFalse()
 end
 
 function testAssertEvalToFalseWithOne()
-    lu.assertEvalToFalse(1)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToFalse, 1)
+    lu.assertFalse(success)  -- Should fail because 1 evaluates to true
 end
 
 function testAssertEvalToFalseWithZero()
-    lu.assertEvalToFalse(0)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToFalse, 0)
+    lu.assertFalse(success)  -- Should fail because 0 evaluates to true
 end
 
 function testAssertEvalToFalseWithHello()
-    lu.assertEvalToFalse("hello")  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToFalse, "hello")
+    lu.assertFalse(success)  -- Should fail because "hello" evaluates to true
 end
 
 function testAssertEvalToFalseWithEmptyString()
-    lu.assertEvalToFalse("")  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToFalse, "")
+    lu.assertFalse(success)  -- Should fail because "" evaluates to true
 end
 
 function testAssertEvalToFalseWithNil()
@@ -82,15 +96,21 @@ function testAssertEvalToFalseWithNil()
 end
 
 function testAssertEvalToFalseWithTable()
-    lu.assertEvalToFalse({})  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToFalse, {})
+    lu.assertFalse(success)  -- Should fail because {} evaluates to true
 end
 
 function testAssertEvalToFalseWithFunction()
-    lu.assertEvalToFalse(function() end)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToFalse, function() end)
+    lu.assertFalse(success)  -- Should fail because functions evaluate to true
 end
 
 function testAssertEvalToFalseWithCoroutine()
-    lu.assertEvalToFalse(coroutine.create(function() end))  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertEvalToFalse, coroutine.create(function() end))
+    lu.assertFalse(success)  -- Should fail because coroutines evaluate to true
 end
 
 -- =======================================
@@ -102,39 +122,57 @@ function testAssertTrueWithTrue()
 end
 
 function testAssertTrueWithFalse()
-    lu.assertTrue(false)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, false)
+    lu.assertFalse(success)  -- Should fail because false is not exactly true
 end
 
 function testAssertTrueWithOne()
-    lu.assertTrue(1)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, 1)
+    lu.assertFalse(success)  -- Should fail because 1 is not exactly true
 end
 
 function testAssertTrueWithZero()
-    lu.assertTrue(0)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, 0)
+    lu.assertFalse(success)  -- Should fail because 0 is not exactly true
 end
 
 function testAssertTrueWithHello()
-    lu.assertTrue("hello")  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, "hello")
+    lu.assertFalse(success)  -- Should fail because "hello" is not exactly true
 end
 
 function testAssertTrueWithEmptyString()
-    lu.assertTrue("")  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, "")
+    lu.assertFalse(success)  -- Should fail because "" is not exactly true
 end
 
 function testAssertTrueWithNil()
-    lu.assertTrue(nil)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, nil)
+    lu.assertFalse(success)  -- Should fail because nil is not exactly true
 end
 
 function testAssertTrueWithTable()
-    lu.assertTrue({})  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, {})
+    lu.assertFalse(success)  -- Should fail because {} is not exactly true
 end
 
 function testAssertTrueWithFunction()
-    lu.assertTrue(function() end)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, function() end)
+    lu.assertFalse(success)  -- Should fail because function is not exactly true
 end
 
 function testAssertTrueWithCoroutine()
-    lu.assertTrue(coroutine.create(function() end))  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertTrue, coroutine.create(function() end))
+    lu.assertFalse(success)  -- Should fail because coroutine is not exactly true
 end
 
 -- =======================================
@@ -142,7 +180,9 @@ end
 -- =======================================
 
 function testAssertFalseWithTrue()
-    lu.assertFalse(true)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, true)
+    lu.assertFalse(success)  -- Should fail because true is not exactly false
 end
 
 function testAssertFalseWithFalse()
@@ -150,35 +190,51 @@ function testAssertFalseWithFalse()
 end
 
 function testAssertFalseWithOne()
-    lu.assertFalse(1)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, 1)
+    lu.assertFalse(success)  -- Should fail because 1 is not exactly false
 end
 
 function testAssertFalseWithZero()
-    lu.assertFalse(0)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, 0)
+    lu.assertFalse(success)  -- Should fail because 0 is not exactly false
 end
 
 function testAssertFalseWithHello()
-    lu.assertFalse("hello")  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, "hello")
+    lu.assertFalse(success)  -- Should fail because "hello" is not exactly false
 end
 
 function testAssertFalseWithEmptyString()
-    lu.assertFalse("")  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, "")
+    lu.assertFalse(success)  -- Should fail because "" is not exactly false
 end
 
 function testAssertFalseWithNil()
-    lu.assertFalse(nil)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, nil)
+    lu.assertFalse(success)  -- Should fail because nil is not exactly false
 end
 
 function testAssertFalseWithTable()
-    lu.assertFalse({})  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, {})
+    lu.assertFalse(success)  -- Should fail because {} is not exactly false
 end
 
 function testAssertFalseWithFunction()
-    lu.assertFalse(function() end)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, function() end)
+    lu.assertFalse(success)  -- Should fail because function is not exactly false
 end
 
 function testAssertFalseWithCoroutine()
-    lu.assertFalse(coroutine.create(function() end))  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertFalse, coroutine.create(function() end))
+    lu.assertFalse(success)  -- Should fail because coroutine is not exactly false
 end
 
 -- =======================================
@@ -186,7 +242,9 @@ end
 -- =======================================
 
 function testAssertNotTrueWithTrue()
-    lu.assertNotTrue(true)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTrue, true)
+    lu.assertFalse(success)  -- Should fail because true is exactly true
 end
 
 function testAssertNotTrueWithFalse()
@@ -234,7 +292,9 @@ function testAssertNotFalseWithTrue()
 end
 
 function testAssertNotFalseWithFalse()
-    lu.assertNotFalse(false)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotFalse, false)
+    lu.assertFalse(success)  -- Should fail because false is exactly false
 end
 
 function testAssertNotFalseWithOne()
@@ -274,27 +334,39 @@ end
 -- =======================================
 
 function testAssertNilWithTrue()
-    lu.assertNil(true)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, true)
+    lu.assertFalse(success)  -- Should fail because true is not nil
 end
 
 function testAssertNilWithFalse()
-    lu.assertNil(false)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, false)
+    lu.assertFalse(success)  -- Should fail because false is not nil
 end
 
 function testAssertNilWithOne()
-    lu.assertNil(1)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, 1)
+    lu.assertFalse(success)  -- Should fail because 1 is not nil
 end
 
 function testAssertNilWithZero()
-    lu.assertNil(0)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, 0)
+    lu.assertFalse(success)  -- Should fail because 0 is not nil
 end
 
 function testAssertNilWithHello()
-    lu.assertNil("hello")  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, "hello")
+    lu.assertFalse(success)  -- Should fail because "hello" is not nil
 end
 
 function testAssertNilWithEmptyString()
-    lu.assertNil("")  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, "")
+    lu.assertFalse(success)  -- Should fail because "" is not nil
 end
 
 function testAssertNilWithNil()
@@ -302,15 +374,21 @@ function testAssertNilWithNil()
 end
 
 function testAssertNilWithTable()
-    lu.assertNil({})  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, {})
+    lu.assertFalse(success)  -- Should fail because {} is not nil
 end
 
 function testAssertNilWithFunction()
-    lu.assertNil(function() end)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, function() end)
+    lu.assertFalse(success)  -- Should fail because function is not nil
 end
 
 function testAssertNilWithCoroutine()
-    lu.assertNil(coroutine.create(function() end))  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNil, coroutine.create(function() end))
+    lu.assertFalse(success)  -- Should fail because coroutine is not nil
 end
 
 -- =======================================
@@ -342,7 +420,9 @@ function testAssertNotNilWithEmptyString()
 end
 
 function testAssertNotNilWithNil()
-    lu.assertNotNil(nil)  -- Should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotNil, nil)
+    lu.assertFalse(success)  -- Should fail because nil is nil
 end
 
 function testAssertNotNilWithTable()
@@ -411,7 +491,9 @@ function testAssertIsWithSameNumberReference()
 end
 
 function testAssertIsWithDifferentNumbers()
-    lu.assertIs(42, 24)  -- Different values, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, 42, 24)
+    lu.assertFalse(success)  -- Should fail because different values are not identical
 end
 
 -- Table comparisons
@@ -420,11 +502,15 @@ function testAssertIsWithSameTableReference()
 end
 
 function testAssertIsWithDifferentTables()
-    lu.assertIs(table1, table2)  -- Different references, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, table1, table2)
+    lu.assertFalse(success)  -- Should fail because different references are not identical
 end
 
 function testAssertIsWithEmptyTables()
-    lu.assertIs({}, {})  -- Different empty tables, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, {}, {})
+    lu.assertFalse(success)  -- Should fail because different empty tables are not identical
 end
 
 -- Boolean comparisons
@@ -437,7 +523,9 @@ function testAssertIsWithSameBooleanFalse()
 end
 
 function testAssertIsWithDifferentBooleans()
-    lu.assertIs(bool1, bool3)  -- true vs false, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, bool1, bool3)
+    lu.assertFalse(success)  -- Should fail because true and false are not identical
 end
 
 function testAssertIsWithLiteralBooleans()
@@ -450,11 +538,15 @@ function testAssertIsWithSameFunctionReference()
 end
 
 function testAssertIsWithDifferentFunctions()
-    lu.assertIs(func1, func2)  -- Different references, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, func1, func2)
+    lu.assertFalse(success)  -- Should fail because different function references are not identical
 end
 
 function testAssertIsWithAnonymousFunctions()
-    lu.assertIs(function() end, function() end)  -- Different anonymous functions, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, function() end, function() end)
+    lu.assertFalse(success)  -- Should fail because different anonymous functions are not identical
 end
 
 -- Nil comparisons
@@ -472,7 +564,9 @@ function testAssertIsWithSameThreadReference()
 end
 
 function testAssertIsWithDifferentThreads()
-    lu.assertIs(thread1, thread2)  -- Different threads, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, thread1, thread2)
+    lu.assertFalse(success)  -- Should fail because different threads are not identical
 end
 
 -- String comparisons
@@ -485,7 +579,9 @@ function testAssertIsWithSameStringReference()
 end
 
 function testAssertIsWithDifferentStrings()
-    lu.assertIs(str1, str3)  -- Different content, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, str1, str3)
+    lu.assertFalse(success)  -- Should fail because different content strings are not identical
 end
 
 function testAssertIsWithLiteralStrings()
@@ -494,15 +590,21 @@ end
 
 -- Mixed type comparisons
 function testAssertIsWithNilAndFalse()
-    lu.assertIs(nil, false)  -- Different types, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, nil, false)
+    lu.assertFalse(success)  -- Should fail because nil and false are different types
 end
 
 function testAssertIsWithZeroAndFalse()
-    lu.assertIs(0, false)  -- Different types, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, 0, false)
+    lu.assertFalse(success)  -- Should fail because 0 and false are different types
 end
 
 function testAssertIsWithEmptyStringAndNil()
-    lu.assertIs("", nil)  -- Different types, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertIs, "", nil)
+    lu.assertFalse(success)  -- Should fail because empty string and nil are different types
 end
 
 -- =======================================
@@ -515,11 +617,15 @@ function testAssertNotIsWithDifferentNumbers()
 end
 
 function testAssertNotIsWithSameNumbers()
-    lu.assertNotIs(num1, num2)  -- Same value, should fail (numbers with same value are identical)
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, num1, num2)
+    lu.assertFalse(success)  -- Should fail because numbers with same value are identical
 end
 
 function testAssertNotIsWithSameNumberReference()
-    lu.assertNotIs(num1, num3)  -- Same reference, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, num1, num3)
+    lu.assertFalse(success)  -- Should fail because same reference is identical
 end
 
 -- Table comparisons
@@ -528,7 +634,9 @@ function testAssertNotIsWithDifferentTables()
 end
 
 function testAssertNotIsWithSameTableReference()
-    lu.assertNotIs(table1, table3)  -- Same reference, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, table1, table3)
+    lu.assertFalse(success)  -- Should fail because same reference is identical
 end
 
 function testAssertNotIsWithEmptyTables()
@@ -541,11 +649,15 @@ function testAssertNotIsWithDifferentBooleans()
 end
 
 function testAssertNotIsWithSameBooleanTrue()
-    lu.assertNotIs(bool1, bool2)  -- Both true, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, bool1, bool2)
+    lu.assertFalse(success)  -- Should fail because both true values are identical
 end
 
 function testAssertNotIsWithSameBooleanFalse()
-    lu.assertNotIs(bool3, bool4)  -- Both false, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, bool3, bool4)
+    lu.assertFalse(success)  -- Should fail because both false values are identical
 end
 
 -- Function comparisons
@@ -554,7 +666,9 @@ function testAssertNotIsWithDifferentFunctions()
 end
 
 function testAssertNotIsWithSameFunctionReference()
-    lu.assertNotIs(func1, func3)  -- Same reference, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, func1, func3)
+    lu.assertFalse(success)  -- Should fail because same reference is identical
 end
 
 function testAssertNotIsWithAnonymousFunctions()
@@ -563,11 +677,15 @@ end
 
 -- Nil comparisons
 function testAssertNotIsWithNilValues()
-    lu.assertNotIs(nil1, nil2)  -- Both nil, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, nil1, nil2)
+    lu.assertFalse(success)  -- Should fail because both nil values are identical
 end
 
 function testAssertNotIsWithLiteralNils()
-    lu.assertNotIs(nil, nil)  -- Literal nils, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, nil, nil)
+    lu.assertFalse(success)  -- Should fail because literal nils are identical
 end
 
 -- Thread comparisons
@@ -576,7 +694,9 @@ function testAssertNotIsWithDifferentThreads()
 end
 
 function testAssertNotIsWithSameThreadReference()
-    lu.assertNotIs(thread1, thread3)  -- Same reference, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, thread1, thread3)
+    lu.assertFalse(success)  -- Should fail because same reference is identical
 end
 
 -- String comparisons
@@ -585,11 +705,15 @@ function testAssertNotIsWithDifferentStrings()
 end
 
 function testAssertNotIsWithSameStrings()
-    lu.assertNotIs(str1, str2)  -- Same content, should fail due to string interning
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, str1, str2)
+    lu.assertFalse(success)  -- Should fail because same content strings are identical due to interning
 end
 
 function testAssertNotIsWithSameStringReference()
-    lu.assertNotIs(str1, str4)  -- Same reference, should fail
+    -- Should fail - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIs, str1, str4)
+    lu.assertFalse(success)  -- Should fail because same reference is identical
 end
 
 -- Mixed type comparisons

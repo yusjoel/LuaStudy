@@ -130,19 +130,27 @@ function testAssertEqualsWithSameFunctionReference()
 end
 
 function testAssertEqualsWithDifferentIntegers()
-    lu.assertEquals(int1, int3)  -- Should fail: 42 != 43
+    -- Should fail: 42 != 43 - use pcall to catch the error
+    local success, err = pcall(lu.assertEquals, int1, int3)
+    lu.assertFalse(success)  -- Should fail due to inequality
 end
 
 function testAssertEqualsWithDifferentFloats()
-    lu.assertEquals(float1, float3)  -- Should fail: 3.14159 != 3.14160
+    -- Should fail: 3.14159 != 3.14160 - use pcall to catch the error
+    local success, err = pcall(lu.assertEquals, float1, float3)
+    lu.assertFalse(success)  -- Should fail due to inequality
 end
 
 function testAssertEqualsWithDifferentStrings()
-    lu.assertEquals(str1, str3)  -- Should fail: "hello" != "Hello"
+    -- Should fail: "hello" != "Hello" - use pcall to catch the error
+    local success, err = pcall(lu.assertEquals, str1, str3)
+    lu.assertFalse(success)  -- Should fail due to inequality
 end
 
 function testAssertEqualsWithDifferentBooleans()
-    lu.assertEquals(bool1, bool3)  -- Should fail: true != false
+    -- Should fail: true != false - use pcall to catch the error
+    local success, err = pcall(lu.assertEquals, bool1, bool3)
+    lu.assertFalse(success)  -- Should fail due to inequality
 end
 
 function testAssertEqualsWithDifferentTables()
@@ -150,7 +158,9 @@ function testAssertEqualsWithDifferentTables()
 end
 
 function testAssertEqualsWithDifferentTableContent()
-    lu.assertEquals(table1, table3)  -- Should fail: different content {1,2,3} vs {1,2,4}
+    -- Should fail: different content {1,2,3} vs {1,2,4} - use pcall to catch the error
+    local success, err = pcall(lu.assertEquals, table1, table3)
+    lu.assertFalse(success)  -- Should fail due to different table content
 end
 
 function testAssertEqualsWithEmptyTables()
@@ -162,15 +172,21 @@ function testAssertEqualsWithHashTables()
 end
 
 function testAssertEqualsWithDifferentFunctions()
-    lu.assertEquals(func1, func2)  -- Should fail: different function objects
+    -- Should fail: different function objects - use pcall to catch the error
+    local success, err = pcall(lu.assertEquals, func1, func2)
+    lu.assertFalse(success)  -- Should fail due to different functions
 end
 
 function testAssertEqualsWithNaNValues()
-    lu.assertEquals(nanValue1, nanValue2)  -- Should fail: NaN != NaN (special property)
+    -- Should fail: NaN != NaN (special property) - use pcall to catch the error
+    local success, err = pcall(lu.assertEquals, nanValue1, nanValue2)
+    lu.assertFalse(success)  -- Should fail due to NaN inequality
 end
 
 function testAssertEqualsWithMixedTypes()
-    lu.assertEquals(mixedValues[1], mixedValues[2])  -- Should fail: 42 != "42"
+    -- Should fail: 42 != "42" - use pcall to catch the error
+    local success, err = pcall(lu.assertEquals, mixedValues[1], mixedValues[2])
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 -- =======================================
@@ -202,15 +218,21 @@ function testAssertNotEqualsWithDifferentTables()
 end
 
 function testAssertNotEqualsWithSameContentTables()
-    lu.assertNotEquals(table1, table2)  -- Should fail: same content {1,2,3}
+    -- Should fail: same content {1,2,3} - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, table1, table2)
+    lu.assertFalse(success)  -- Should fail due to same table content
 end
 
 function testAssertNotEqualsWithEmptyTables()
-    lu.assertNotEquals(emptyTable1, emptyTable2)  -- Should fail: both empty tables
+    -- Should fail: both empty tables - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, emptyTable1, emptyTable2)
+    lu.assertFalse(success)  -- Should fail due to same empty table content
 end
 
 function testAssertNotEqualsWithHashTables()
-    lu.assertNotEquals(hashTable1, hashTable2)  -- Should fail: same key-value pairs
+    -- Should fail: same key-value pairs - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, hashTable1, hashTable2)
+    lu.assertFalse(success)  -- Should fail due to same hash table content
 end
 
 function testAssertNotEqualsWithDifferentFunctions()
@@ -238,27 +260,39 @@ function testAssertNotEqualsWithEmptyTableAndNil()
 end
 
 function testAssertNotEqualsWithIdenticalIntegers()
-    lu.assertNotEquals(int1, int2)  -- Should fail: 42 == 42
+    -- Should fail: 42 == 42 - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, int1, int2)
+    lu.assertFalse(success)  -- Should fail due to equality
 end
 
 function testAssertNotEqualsWithIdenticalStrings()
-    lu.assertNotEquals(str1, str2)  -- Should fail: "hello" == "hello"
+    -- Should fail: "hello" == "hello" - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, str1, str2)
+    lu.assertFalse(success)  -- Should fail due to equality
 end
 
 function testAssertNotEqualsWithIdenticalBooleans()
-    lu.assertNotEquals(bool1, bool2)  -- Should fail: true == true
+    -- Should fail: true == true - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, bool1, bool2)
+    lu.assertFalse(success)  -- Should fail due to equality
 end
 
 function testAssertNotEqualsWithNilValues()
-    lu.assertNotEquals(nilValue1, nilValue2)  -- Should fail: nil == nil
+    -- Should fail: nil == nil - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, nilValue1, nilValue2)
+    lu.assertFalse(success)  -- Should fail due to equality
 end
 
 function testAssertNotEqualsWithSameReference()
-    lu.assertNotEquals(table1, table1)  -- Should fail: same table reference
+    -- Should fail: same table reference - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, table1, table1)
+    lu.assertFalse(success)  -- Should fail due to same reference
 end
 
 function testAssertNotEqualsWithZeroTypes()
-    lu.assertNotEquals(zero1, zero2)  -- Should fail: 0 == 0.0
+    -- Should fail: 0 == 0.0 - use pcall to catch the error
+    local success, err = pcall(lu.assertNotEquals, zero1, zero2)
+    lu.assertFalse(success)  -- Should fail due to equality
 end
 
 -- =======================================
@@ -302,27 +336,39 @@ function testAssertAlmostEqualsWithCustomTolerance()
 end
 
 function testAssertAlmostEqualsWithTightTolerance()
-    lu.assertAlmostEquals(1.0, 1.01, 0.005)  -- Should fail: difference 0.01 > tolerance 0.005
+    -- Should fail: difference 0.01 > tolerance 0.005 - use pcall to catch the error
+    local success, err = pcall(lu.assertAlmostEquals, 1.0, 1.01, 0.005)
+    lu.assertFalse(success)  -- Should fail due to difference exceeding tolerance
 end
 
 function testAssertAlmostEqualsWithLargeDifference()
-    lu.assertAlmostEquals(approx1, approx4, 1e-6)  -- Should fail: 1.0 vs 1.1 (too large difference)
+    -- Should fail: 1.0 vs 1.1 (too large difference) - use pcall to catch the error
+    local success, err = pcall(lu.assertAlmostEquals, approx1, approx4, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to large difference
 end
 
 function testAssertAlmostEqualsWithVeryDifferentNumbers()
-    lu.assertAlmostEquals(1.0, 10.0, 1e-6)  -- Should fail: very different numbers
+    -- Should fail: very different numbers - use pcall to catch the error
+    local success, err = pcall(lu.assertAlmostEquals, 1.0, 10.0, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to very different numbers
 end
 
 function testAssertAlmostEqualsWithInfinity()
-    lu.assertAlmostEquals(math.huge, math.huge, 1e-6)  -- Should fail: math.huge - math.huge = NaN in Lua, NaN != 0
+    -- Should fail: math.huge - math.huge = NaN in Lua, NaN != 0 - use pcall to catch the error
+    local success, err = pcall(lu.assertAlmostEquals, math.huge, math.huge, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to NaN comparison
 end
 
 function testAssertAlmostEqualsWithNaN()
-    lu.assertAlmostEquals(0/0, 0/0, 1e-6)  -- Should fail: NaN != NaN
+    -- Should fail: NaN != NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertAlmostEquals, 0/0, 0/0, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to NaN inequality
 end
 
 function testAssertAlmostEqualsWithMixedInfinity()
-    lu.assertAlmostEquals(math.huge, -math.huge, 1e-6)  -- Should fail: +inf != -inf
+    -- Should fail: +inf != -inf - use pcall to catch the error
+    local success, err = pcall(lu.assertAlmostEquals, math.huge, -math.huge, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to different infinities
 end
 
 function testAssertAlmostEqualsWithStringNumbers()
@@ -384,19 +430,27 @@ function testAssertNotAlmostEqualsWithTable()
 end
 
 function testAssertNotAlmostEqualsWithExactMatch()
-    lu.assertNotAlmostEquals(approx1, approx1, 1e-6)  -- Should fail: exact match
+    -- Should fail: exact match - use pcall to catch the error
+    local success, err = pcall(lu.assertNotAlmostEquals, approx1, approx1, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to exact match
 end
 
 function testAssertNotAlmostEqualsWithSmallDifference()
-    lu.assertNotAlmostEquals(approx1, approx2, 1e-6)  -- Should fail: within tolerance
+    -- Should fail: within tolerance - use pcall to catch the error
+    local success, err = pcall(lu.assertNotAlmostEquals, approx1, approx2, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to values within tolerance
 end
 
 function testAssertNotAlmostEqualsWithTinyDifference()
-    lu.assertNotAlmostEquals(1.0, 1.0000001, 1e-6)  -- Should fail: very small difference within tolerance
+    -- Should fail: very small difference within tolerance - use pcall to catch the error
+    local success, err = pcall(lu.assertNotAlmostEquals, 1.0, 1.0000001, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to tiny difference within tolerance
 end
 
 function testAssertNotAlmostEqualsWithZeroValues()
-    lu.assertNotAlmostEquals(0.0, 0.0000001, 1e-6)  -- Should fail: near zero, within tolerance
+    -- Should fail: near zero, within tolerance - use pcall to catch the error
+    local success, err = pcall(lu.assertNotAlmostEquals, 0.0, 0.0000001, 1e-6)
+    lu.assertFalse(success)  -- Should fail due to values within tolerance
 end
 
 function testAssertNotAlmostEqualsWithInfinity()
@@ -404,7 +458,9 @@ function testAssertNotAlmostEqualsWithInfinity()
 end
 
 function testAssertNotAlmostEqualsWithCustomToleranceMatch()
-    lu.assertNotAlmostEquals(1.0, 1.05, 0.1)  -- Should fail: within custom tolerance 0.1
+    -- Should fail: within custom tolerance 0.1 - use pcall to catch the error
+    local success, err = pcall(lu.assertNotAlmostEquals, 1.0, 1.05, 0.1)
+    lu.assertFalse(success)  -- Should fail due to values within custom tolerance
 end
 
 -- Run the tests

@@ -32,8 +32,8 @@ local substr9 = "fox"
 local substr10 = ""  -- empty substring
 
 -- Patterns for assertStrMatches
-local pattern1 = "^Hello"  -- starts with Hello
-local pattern2 = "World$"  -- ends with World
+local pattern1 = "^Hello.*"  -- starts with Hello and matches the rest
+local pattern2 = ".*World$"  -- matches anything ending with World
 local pattern3 = "%d+%-%d+%-%d+"  -- phone number pattern
 local pattern4 = ".+@.+%.%w+"  -- email pattern
 local pattern5 = "%d%d%d%d%-%d%d%-%d%d"  -- date pattern
@@ -76,15 +76,21 @@ function testAssertStrContainsEmptyInHelloWorld()
 end
 
 function testAssertStrContainsXyzInHelloWorld()
-    lu.assertStrContains(str1, substr7)  -- Should fail: "xyz" not in "Hello World"
+    -- Should fail: "xyz" not in "Hello World" - use pcall to catch the error
+    local success, err = pcall(lu.assertStrContains, str1, substr7)
+    lu.assertFalse(success)  -- Should fail due to substring not found
 end
 
 function testAssertStrContainsHelloInEmptyString()
-    lu.assertStrContains(str6, substr1)  -- Should fail: "Hello" not in empty string
+    -- Should fail: "Hello" not in empty string - use pcall to catch the error
+    local success, err = pcall(lu.assertStrContains, str6, substr1)
+    lu.assertFalse(success)  -- Should fail due to empty string
 end
 
 function testAssertStrContainsHelloUpperInHelloWorld()
-    lu.assertStrContains(str1, substr3)  -- Should fail: "HELLO" not in "Hello World" (case sensitive)
+    -- Should fail: "HELLO" not in "Hello World" (case sensitive) - use pcall to catch the error
+    local success, err = pcall(lu.assertStrContains, str1, substr3)
+    lu.assertFalse(success)  -- Should fail due to case sensitivity
 end
 
 -- =======================================
@@ -112,23 +118,33 @@ function testAssertNotStrContainsXyzInProgrammingLua()
 end
 
 function testAssertNotStrContainsHelloInHelloWorld()
-    lu.assertNotStrContains(str1, substr1)  -- Should fail: "Hello" is in "Hello World"
+    -- Should fail: "Hello" is in "Hello World" - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrContains, str1, substr1)
+    lu.assertFalse(success)  -- Should fail because substring is found
 end
 
 function testAssertNotStrContainsWorldInHelloWorld()
-    lu.assertNotStrContains(str1, substr2)  -- Should fail: "World" is in "Hello World"
+    -- Should fail: "World" is in "Hello World" - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrContains, str1, substr2)
+    lu.assertFalse(success)  -- Should fail because substring is found
 end
 
 function testAssertNotStrContainsProgrammingInProgrammingLua()
-    lu.assertNotStrContains(str2, substr5)  -- Should fail: "Programming" is in "Programming in Lua"
+    -- Should fail: "Programming" is in "Programming in Lua" - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrContains, str2, substr5)
+    lu.assertFalse(success)  -- Should fail because substring is found
 end
 
 function testAssertNotStrContainsEmptyInHelloWorld()
-    lu.assertNotStrContains(str1, substr10)  -- Should fail: empty string is contained in any string
+    -- Should fail: empty string is contained in any string - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrContains, str1, substr10)
+    lu.assertFalse(success)  -- Should fail because empty string is always contained
 end
 
 function testAssertNotStrContainsQuickInQuickBrownFox()
-    lu.assertNotStrContains(str5, substr8)  -- Should fail: "quick" is in "The quick brown fox..."
+    -- Should fail: "quick" is in "The quick brown fox..." - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrContains, str5, substr8)
+    lu.assertFalse(success)  -- Should fail because substring is found
 end
 
 -- =======================================
@@ -164,11 +180,15 @@ function testAssertStrIContainsQuickUpperInQuickBrownFox()
 end
 
 function testAssertStrIContainsXyzInHelloWorld()
-    lu.assertStrIContains(str1, substr7)  -- Should fail: "xyz" not in "Hello World" even case insensitive
+    -- Should fail: "xyz" not in "Hello World" even case insensitive - use pcall to catch the error
+    local success, err = pcall(lu.assertStrIContains, str1, substr7)
+    lu.assertFalse(success)  -- Should fail because substring doesn't exist
 end
 
 function testAssertStrIContainsHelloInEmptyString()
-    lu.assertStrIContains(str6, substr1)  -- Should fail: "Hello" not in empty string
+    -- Should fail: "Hello" not in empty string - use pcall to catch the error
+    local success, err = pcall(lu.assertStrIContains, str6, substr1)
+    lu.assertFalse(success)  -- Should fail because of empty string
 end
 
 function testAssertStrIContainsEmptyInHelloWorld()
@@ -200,23 +220,33 @@ function testAssertNotStrIContainsAbcInMixedCase()
 end
 
 function testAssertNotStrIContainsHelloUpperInHelloWorld()
-    lu.assertNotStrIContains(str1, substr3)  -- Should fail: "HELLO" is in "Hello World" (case insensitive)
+    -- Should fail: "HELLO" is in "Hello World" (case insensitive) - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrIContains, str1, substr3)
+    lu.assertFalse(success)  -- Should fail because substring is found (case insensitive)
 end
 
 function testAssertNotStrIContainsWorldLowerInHelloWorld()
-    lu.assertNotStrIContains(str1, substr4)  -- Should fail: "world" is in "Hello World" (case insensitive)
+    -- Should fail: "world" is in "Hello World" (case insensitive) - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrIContains, str1, substr4)
+    lu.assertFalse(success)  -- Should fail because substring is found (case insensitive)
 end
 
 function testAssertNotStrIContainsLuaLowerInProgrammingLua()
-    lu.assertNotStrIContains(str2, "lua")  -- Should fail: "lua" is in "Programming in Lua" (case insensitive)
+    -- Should fail: "lua" is in "Programming in Lua" (case insensitive) - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrIContains, str2, "lua")
+    lu.assertFalse(success)  -- Should fail because substring is found (case insensitive)
 end
 
 function testAssertNotStrIContainsQuickUpperInQuickBrownFox()
-    lu.assertNotStrIContains(str5, "QUICK")  -- Should fail: "QUICK" is in "The quick brown fox..." (case insensitive)
+    -- Should fail: "QUICK" is in "The quick brown fox..." (case insensitive) - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrIContains, str5, "QUICK")
+    lu.assertFalse(success)  -- Should fail because substring is found (case insensitive)
 end
 
 function testAssertNotStrIContainsEmptyInHelloWorld()
-    lu.assertNotStrIContains(str1, substr10)  -- Should fail: empty string is contained in any string
+    -- Should fail: empty string is contained in any string - use pcall to catch the error
+    local success, err = pcall(lu.assertNotStrIContains, str1, substr10)
+    lu.assertFalse(success)  -- Should fail because empty string is always contained
 end
 
 -- =======================================
@@ -244,11 +274,15 @@ function testAssertStrMatchesDateWithDatePattern()
 end
 
 function testAssertStrMatchesHelloWorldWithLettersPattern()
-    lu.assertStrMatches(str1, pattern6)  -- Should fail: "Hello World" has space, %a+ only matches continuous letters
+    -- Should fail: "Hello World" has space, %a+ only matches continuous letters - use pcall to catch the error
+    local success, err = pcall(lu.assertStrMatches, str1, pattern6)
+    lu.assertFalse(success)  -- Should fail because of space in string
 end
 
 function testAssertStrMatchesPhoneWithDigitsPattern()
-    lu.assertStrMatches(str7, pattern7)  -- Should fail: "123-456-7890" has hyphens, %d+ only matches continuous digits
+    -- Should fail: "123-456-7890" has hyphens, %d+ only matches continuous digits - use pcall to catch the error
+    local success, err = pcall(lu.assertStrMatches, str7, pattern7)
+    lu.assertFalse(success)  -- Should fail because of hyphens in phone number
 end
 
 function testAssertStrMatchesEmptyStringWithEmptyPattern()
@@ -260,27 +294,39 @@ function testAssertStrMatchesHelloWorldWithEverythingPattern()
 end
 
 function testAssertStrMatchesHelloWorldWithDigitsPattern()
-    lu.assertStrMatches(str1, pattern7)  -- Should fail: "Hello World" doesn't match digits only pattern
+    -- Should fail: "Hello World" doesn't match digits only pattern - use pcall to catch the error
+    local success, err = pcall(lu.assertStrMatches, str1, pattern7)
+    lu.assertFalse(success)  -- Should fail because string contains letters, not digits
 end
 
 function testAssertStrMatchesPhoneWithEmailPattern()
-    lu.assertStrMatches(str7, pattern4)  -- Should fail: phone number doesn't match email pattern
+    -- Should fail: phone number doesn't match email pattern - use pcall to catch the error
+    local success, err = pcall(lu.assertStrMatches, str7, pattern4)
+    lu.assertFalse(success)  -- Should fail because phone number doesn't match email pattern
 end
 
 function testAssertStrMatchesEmailWithPhonePattern()
-    lu.assertStrMatches(str8, pattern3)  -- Should fail: email doesn't match phone pattern
+    -- Should fail: email doesn't match phone pattern - use pcall to catch the error
+    local success, err = pcall(lu.assertStrMatches, str8, pattern3)
+    lu.assertFalse(success)  -- Should fail because email doesn't match phone pattern
 end
 
 function testAssertStrMatchesHelloWorldWithLowercasePattern()
-    lu.assertStrMatches(str1, pattern10)  -- Should fail: "Hello World" has uppercase letters
+    -- Should fail: "Hello World" has uppercase letters - use pcall to catch the error
+    local success, err = pcall(lu.assertStrMatches, str1, pattern10)
+    lu.assertFalse(success)  -- Should fail because string contains uppercase letters
 end
 
 function testAssertStrMatchesEmptyStringWithLettersPattern()
-    lu.assertStrMatches(str6, pattern6)  -- Should fail: empty string doesn't contain letters
+    -- Should fail: empty string doesn't contain letters - use pcall to catch the error
+    local success, err = pcall(lu.assertStrMatches, str6, pattern6)
+    lu.assertFalse(success)  -- Should fail because empty string has no letters
 end
 
 function testAssertStrMatchesDateWithEmailPattern()
-    lu.assertStrMatches(str9, pattern4)  -- Should fail: date doesn't match email pattern
+    -- Should fail: date doesn't match email pattern - use pcall to catch the error
+    local success, err = pcall(lu.assertStrMatches, str9, pattern4)
+    lu.assertFalse(success)  -- Should fail because date format doesn't match email pattern
 end
 
 -- Run the tests

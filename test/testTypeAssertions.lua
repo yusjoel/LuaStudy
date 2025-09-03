@@ -101,23 +101,33 @@ function testAssertIsNumberWithNaN()
 end
 
 function testAssertIsNumberWithString()
-    lu.assertIsNumber(stringNumber)  -- Should fail: "123" is a string, not number
+    -- Should fail: "123" is a string, not number - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNumber, stringNumber)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsNumberWithTable()
-    lu.assertIsNumber(tableEmpty)  -- Should fail: {} is a table, not number
+    -- Should fail: {} is a table, not number - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNumber, tableEmpty)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsNumberWithBoolean()
-    lu.assertIsNumber(boolTrue)  -- Should fail: true is a boolean, not number
+    -- Should fail: true is a boolean, not number - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNumber, boolTrue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsNumberWithNil()
-    lu.assertIsNumber(nilValue)  -- Should fail: nil is not a number
+    -- Should fail: nil is not a number - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNumber, nilValue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsNumberWithFunction()
-    lu.assertIsNumber(simpleFunction)  -- Should fail: function is not a number
+    -- Should fail: function is not a number - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNumber, simpleFunction)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 -- =======================================
@@ -149,23 +159,33 @@ function testAssertIsStringWithUnicode()
 end
 
 function testAssertIsStringWithNumber()
-    lu.assertIsString(numberInt)  -- Should fail: 42 is a number, not string
+    -- Should fail: 42 is a number, not string - use pcall to catch the error
+    local success, err = pcall(lu.assertIsString, numberInt)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsStringWithTable()
-    lu.assertIsString(tableArray)  -- Should fail: {1,2,3,4,5} is a table, not string
+    -- Should fail: {1,2,3,4,5} is a table, not string - use pcall to catch the error
+    local success, err = pcall(lu.assertIsString, tableArray)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsStringWithBoolean()
-    lu.assertIsString(boolFalse)  -- Should fail: false is a boolean, not string
+    -- Should fail: false is a boolean, not string - use pcall to catch the error
+    local success, err = pcall(lu.assertIsString, boolFalse)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsStringWithNil()
-    lu.assertIsString(nilValue)  -- Should fail: nil is not a string
+    -- Should fail: nil is not a string - use pcall to catch the error
+    local success, err = pcall(lu.assertIsString, nilValue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsStringWithFunction()
-    lu.assertIsString(functionAnonymous)  -- Should fail: function is not a string
+    -- Should fail: function is not a string - use pcall to catch the error
+    local success, err = pcall(lu.assertIsString, functionAnonymous)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 -- =======================================
@@ -193,23 +213,33 @@ function testAssertIsTableWithNested()
 end
 
 function testAssertIsTableWithNumber()
-    lu.assertIsTable(numberFloat)  -- Should fail: 3.14159 is a number, not table
+    -- Should fail: 3.14159 is a number, not table - use pcall to catch the error
+    local success, err = pcall(lu.assertIsTable, numberFloat)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsTableWithString()
-    lu.assertIsTable(stringSimple)  -- Should fail: "Hello, World!" is a string, not table
+    -- Should fail: "Hello, World!" is a string, not table - use pcall to catch the error
+    local success, err = pcall(lu.assertIsTable, stringSimple)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsTableWithBoolean()
-    lu.assertIsTable(boolTrue)  -- Should fail: true is a boolean, not table
+    -- Should fail: true is a boolean, not table - use pcall to catch the error
+    local success, err = pcall(lu.assertIsTable, boolTrue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsTableWithNil()
-    lu.assertIsTable(nilValue)  -- Should fail: nil is not a table
+    -- Should fail: nil is not a table - use pcall to catch the error
+    local success, err = pcall(lu.assertIsTable, nilValue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsTableWithFunction()
-    lu.assertIsTable(functionWithArgs)  -- Should fail: function is not a table
+    -- Should fail: function is not a table - use pcall to catch the error
+    local success, err = pcall(lu.assertIsTable, functionWithArgs)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 -- =======================================
@@ -225,28 +255,40 @@ function testAssertIsBooleanWithFalse()
 end
 
 function testAssertIsBooleanWithNumber()
-    lu.assertIsBoolean(numberZero)  -- Should fail: 0 is a number, not boolean
+    -- Should fail: 0 is a number, not boolean - use pcall to catch the error
+    local success, err = pcall(lu.assertIsBoolean, numberZero)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsBooleanWithString()
-    lu.assertIsBoolean(stringEmpty)  -- Should fail: "" is a string, not boolean
+    -- Should fail: "" is a string, not boolean - use pcall to catch the error
+    local success, err = pcall(lu.assertIsBoolean, stringEmpty)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsBooleanWithTable()
-    lu.assertIsBoolean(tableEmpty)  -- Should fail: {} is a table, not boolean
+    -- Should fail: {} is a table, not boolean - use pcall to catch the error
+    local success, err = pcall(lu.assertIsBoolean, tableEmpty)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsBooleanWithNil()
-    lu.assertIsBoolean(nilValue)  -- Should fail: nil is not a boolean
+    -- Should fail: nil is not a boolean - use pcall to catch the error
+    local success, err = pcall(lu.assertIsBoolean, nilValue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsBooleanWithFunction()
-    lu.assertIsBoolean(simpleFunction)  -- Should fail: function is not a boolean
+    -- Should fail: function is not a boolean - use pcall to catch the error
+    local success, err = pcall(lu.assertIsBoolean, simpleFunction)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsBooleanWithUserdata()
     if userdataFile then
-        lu.assertIsBoolean(userdataFile)  -- Should fail: file handle is userdata, not boolean
+        -- Should fail: file handle is userdata, not boolean - use pcall to catch the error
+        local success, err = pcall(lu.assertIsBoolean, userdataFile)
+        lu.assertFalse(success)  -- Should fail due to type mismatch
     end
 end
 
@@ -263,23 +305,33 @@ function testAssertIsNilWithUndefinedVariable()
 end
 
 function testAssertIsNilWithNumber()
-    lu.assertIsNil(numberZero)  -- Should fail: 0 is a number, not nil
+    -- Should fail: 0 is a number, not nil - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNil, numberZero)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsNilWithEmptyString()
-    lu.assertIsNil(stringEmpty)  -- Should fail: "" is a string, not nil
+    -- Should fail: "" is a string, not nil - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNil, stringEmpty)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsNilWithEmptyTable()
-    lu.assertIsNil(tableEmpty)  -- Should fail: {} is a table, not nil
+    -- Should fail: {} is a table, not nil - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNil, tableEmpty)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsNilWithFalse()
-    lu.assertIsNil(boolFalse)  -- Should fail: false is a boolean, not nil
+    -- Should fail: false is a boolean, not nil - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNil, boolFalse)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsNilWithFunction()
-    lu.assertIsNil(functionBuiltin)  -- Should fail: print is a function, not nil
+    -- Should fail: print is a function, not nil - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNil, functionBuiltin)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 -- =======================================
@@ -307,23 +359,33 @@ function testAssertIsFunctionWithMath()
 end
 
 function testAssertIsFunctionWithNumber()
-    lu.assertIsFunction(numberInt)  -- Should fail: 42 is a number, not function
+    -- Should fail: 42 is a number, not function - use pcall to catch the error
+    local success, err = pcall(lu.assertIsFunction, numberInt)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsFunctionWithString()
-    lu.assertIsFunction(stringSimple)  -- Should fail: "Hello, World!" is a string, not function
+    -- Should fail: "Hello, World!" is a string, not function - use pcall to catch the error
+    local success, err = pcall(lu.assertIsFunction, stringSimple)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsFunctionWithTable()
-    lu.assertIsFunction(tableHash)  -- Should fail: table is not a function
+    -- Should fail: table is not a function - use pcall to catch the error
+    local success, err = pcall(lu.assertIsFunction, tableHash)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsFunctionWithBoolean()
-    lu.assertIsFunction(boolTrue)  -- Should fail: true is a boolean, not function
+    -- Should fail: true is a boolean, not function - use pcall to catch the error
+    local success, err = pcall(lu.assertIsFunction, boolTrue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsFunctionWithNil()
-    lu.assertIsFunction(nilValue)  -- Should fail: nil is not a function
+    -- Should fail: nil is not a function - use pcall to catch the error
+    local success, err = pcall(lu.assertIsFunction, nilValue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 -- =======================================
@@ -337,31 +399,45 @@ function testAssertIsUserdataWithFileHandle()
 end
 
 function testAssertIsUserdataWithNumber()
-    lu.assertIsUserdata(numberInt)  -- Should fail: 42 is a number, not userdata
+    -- Should fail: 42 is a number, not userdata - use pcall to catch the error
+    local success, err = pcall(lu.assertIsUserdata, numberInt)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsUserdataWithString()
-    lu.assertIsUserdata(stringSimple)  -- Should fail: "Hello, World!" is a string, not userdata
+    -- Should fail: "Hello, World!" is a string, not userdata - use pcall to catch the error
+    local success, err = pcall(lu.assertIsUserdata, stringSimple)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsUserdataWithTable()
-    lu.assertIsUserdata(tableArray)  -- Should fail: {1,2,3,4,5} is a table, not userdata
+    -- Should fail: {1,2,3,4,5} is a table, not userdata - use pcall to catch the error
+    local success, err = pcall(lu.assertIsUserdata, tableArray)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsUserdataWithBoolean()
-    lu.assertIsUserdata(boolFalse)  -- Should fail: false is a boolean, not userdata
+    -- Should fail: false is a boolean, not userdata - use pcall to catch the error
+    local success, err = pcall(lu.assertIsUserdata, boolFalse)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsUserdataWithNil()
-    lu.assertIsUserdata(nilValue)  -- Should fail: nil is not userdata
+    -- Should fail: nil is not userdata - use pcall to catch the error
+    local success, err = pcall(lu.assertIsUserdata, nilValue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsUserdataWithFunction()
-    lu.assertIsUserdata(functionMath)  -- Should fail: math.sin is a function, not userdata
+    -- Should fail: math.sin is a function, not userdata - use pcall to catch the error
+    local success, err = pcall(lu.assertIsUserdata, functionMath)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsUserdataWithCoroutine()
-    lu.assertIsUserdata(coroutineSimple)  -- Should fail: coroutine is thread, not userdata
+    -- Should fail: coroutine is thread, not userdata - use pcall to catch the error
+    local success, err = pcall(lu.assertIsUserdata, coroutineSimple)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 -- =======================================
@@ -377,32 +453,46 @@ function testAssertIsCoroutineWithYield()
 end
 
 function testAssertIsCoroutineWithNumber()
-    lu.assertIsCoroutine(numberInt)  -- Should fail: 42 is a number, not coroutine
+    -- Should fail: 42 is a number, not coroutine - use pcall to catch the error
+    local success, err = pcall(lu.assertIsCoroutine, numberInt)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsCoroutineWithString()
-    lu.assertIsCoroutine(stringSimple)  -- Should fail: "Hello, World!" is a string, not coroutine
+    -- Should fail: "Hello, World!" is a string, not coroutine - use pcall to catch the error
+    local success, err = pcall(lu.assertIsCoroutine, stringSimple)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsCoroutineWithTable()
-    lu.assertIsCoroutine(tableEmpty)  -- Should fail: {} is a table, not coroutine
+    -- Should fail: {} is a table, not coroutine - use pcall to catch the error
+    local success, err = pcall(lu.assertIsCoroutine, tableEmpty)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsCoroutineWithBoolean()
-    lu.assertIsCoroutine(boolTrue)  -- Should fail: true is a boolean, not coroutine
+    -- Should fail: true is a boolean, not coroutine - use pcall to catch the error
+    local success, err = pcall(lu.assertIsCoroutine, boolTrue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsCoroutineWithNil()
-    lu.assertIsCoroutine(nilValue)  -- Should fail: nil is not coroutine
+    -- Should fail: nil is not coroutine - use pcall to catch the error
+    local success, err = pcall(lu.assertIsCoroutine, nilValue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsCoroutineWithFunction()
-    lu.assertIsCoroutine(simpleFunction)  -- Should fail: function is not coroutine
+    -- Should fail: function is not coroutine - use pcall to catch the error
+    local success, err = pcall(lu.assertIsCoroutine, simpleFunction)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsCoroutineWithUserdata()
     if userdataFile then
-        lu.assertIsCoroutine(userdataFile)  -- Should fail: file handle is userdata, not coroutine
+        -- Should fail: file handle is userdata, not coroutine - use pcall to catch the error
+        local success, err = pcall(lu.assertIsCoroutine, userdataFile)
+        lu.assertFalse(success)  -- Should fail due to type mismatch
     end
 end
 
@@ -419,32 +509,46 @@ function testAssertIsThreadWithYield()
 end
 
 function testAssertIsThreadWithNumber()
-    lu.assertIsThread(numberFloat)  -- Should fail: 3.14159 is a number, not thread
+    -- Should fail: 3.14159 is a number, not thread - use pcall to catch the error
+    local success, err = pcall(lu.assertIsThread, numberFloat)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsThreadWithString()
-    lu.assertIsThread(stringMultiline)  -- Should fail: multiline string is a string, not thread
+    -- Should fail: multiline string is a string, not thread - use pcall to catch the error
+    local success, err = pcall(lu.assertIsThread, stringMultiline)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsThreadWithTable()
-    lu.assertIsThread(tableMixed)  -- Should fail: mixed table is a table, not thread
+    -- Should fail: mixed table is a table, not thread - use pcall to catch the error
+    local success, err = pcall(lu.assertIsThread, tableMixed)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsThreadWithBoolean()
-    lu.assertIsThread(boolFalse)  -- Should fail: false is a boolean, not thread
+    -- Should fail: false is a boolean, not thread - use pcall to catch the error
+    local success, err = pcall(lu.assertIsThread, boolFalse)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsThreadWithNil()
-    lu.assertIsThread(nilValue)  -- Should fail: nil is not thread
+    -- Should fail: nil is not thread - use pcall to catch the error
+    local success, err = pcall(lu.assertIsThread, nilValue)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsThreadWithFunction()
-    lu.assertIsThread(functionBuiltin)  -- Should fail: print is a function, not thread
+    -- Should fail: print is a function, not thread - use pcall to catch the error
+    local success, err = pcall(lu.assertIsThread, functionBuiltin)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertIsThreadWithUserdata()
     if userdataFile then
-        lu.assertIsThread(userdataFile)  -- Should fail: file handle is userdata, not thread
+        -- Should fail: file handle is userdata, not thread - use pcall to catch the error
+        local success, err = pcall(lu.assertIsThread, userdataFile)
+        lu.assertFalse(success)  -- Should fail due to type mismatch
     end
 end
 

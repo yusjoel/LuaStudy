@@ -138,7 +138,9 @@ function testAssertItemsEqualsWithSameReference()
 end
 
 function testAssertItemsEqualsWithEmptyAndNonEmpty()
-    lu.assertItemsEquals(emptyTable1, array1)  -- Should fail: empty vs non-empty
+    -- Should fail: empty vs non-empty - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, emptyTable1, array1)
+    lu.assertFalse(success)  -- Should fail due to different items
 end
 
 function testAssertItemsEqualsWithDifferentArrayOrder()
@@ -154,43 +156,59 @@ function testAssertItemsEqualsWithArrayVsHash()
 end
 
 function testAssertItemsEqualsWithDifferentArrayLength()
-    lu.assertItemsEquals(array1, array4)  -- Should fail: different items {1,2,3} vs {1,2,3,4}
+    -- Should fail: different items {1,2,3} vs {1,2,3,4} - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, array1, array4)
+    lu.assertFalse(success)  -- Should fail due to different item count
 end
 
 function testAssertItemsEqualsWithDifferentTypes()
-    lu.assertItemsEquals(array1, array5)  -- Should fail: different items {1,2,3} vs {1,2,"3"}
+    -- Should fail: different items {1,2,3} vs {1,2,"3"} - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, array1, array5)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertItemsEqualsWithDifferentHashValues()
-    lu.assertItemsEquals(hash1, hash4)  -- Should fail: different items due to age difference
+    -- Should fail: different items due to age difference - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, hash1, hash4)
+    lu.assertFalse(success)  -- Should fail due to different values
 end
 
 function testAssertItemsEqualsWithMissingItem()
-    lu.assertItemsEquals(hash1, hash5)  -- Should fail: different items due to missing city
+    -- Should fail: different items due to missing city - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, hash1, hash5)
+    lu.assertFalse(success)  -- Should fail due to missing item
 end
 
 function testAssertItemsEqualsWithDifferentItemsSameKeys()
-    lu.assertItemsEquals(diffKeys1, diffKeys3)  -- Should fail: {1,2} vs {2,1} different items
+    lu.assertItemsEquals(diffKeys1, diffKeys3)  -- Should pass: {1,2} vs {2,1} same items, different order
 end
 
 function testAssertItemsEqualsWithDifferentNestedValues()
-    lu.assertItemsEquals(nested1, nested3)  -- Should fail: different nested age values
+    -- Should fail: different nested age values - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, nested1, nested3)
+    lu.assertFalse(success)  -- Should fail due to nested differences
 end
 
 function testAssertItemsEqualsWithMixedMissingElement()
-    lu.assertItemsEquals(mixed1, mixed4)  -- Should fail: different items due to missing element
+    -- Should fail: different items due to missing element - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, mixed1, mixed4)
+    lu.assertFalse(success)  -- Should fail due to missing element
 end
 
 function testAssertItemsEqualsWithNonTable()
-    lu.assertItemsEquals(array1, "not a table")  -- Should fail: table vs string
+    -- Should fail: table vs string - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, array1, "not a table")
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertItemsEqualsWithNilTable()
-    lu.assertItemsEquals(array1, nil)  -- Should fail: table vs nil
+    -- Should fail: table vs nil - use pcall to catch the error
+    local success, err = pcall(lu.assertItemsEquals, array1, nil)
+    lu.assertFalse(success)  -- Should fail due to nil argument
 end
 
 function testAssertItemsEqualsWithNumber()
-    lu.assertItemsEquals(42, 42)  -- Should fail: numbers are not tables
+    lu.assertItemsEquals(42, 42)  -- Should pass: fallback to assertEquals when not tables
 end
 
 -- =======================================
@@ -250,35 +268,51 @@ function testAssertTableContainsTableInNested()
 end
 
 function testAssertTableContainsNonExistingNumber()
-    lu.assertTableContains(simpleArray, nonExistingNumber)  -- Should fail: 99 doesn't exist
+    -- Should fail: 99 doesn't exist - use pcall to catch the error
+    local success, err = pcall(lu.assertTableContains, simpleArray, nonExistingNumber)
+    lu.assertFalse(success)  -- Should fail because value not found
 end
 
 function testAssertTableContainsNonExistingString()
-    lu.assertTableContains(stringArray, nonExistingString)  -- Should fail: "grape" doesn't exist
+    -- Should fail: "grape" doesn't exist - use pcall to catch the error
+    local success, err = pcall(lu.assertTableContains, stringArray, nonExistingString)
+    lu.assertFalse(success)  -- Should fail because value not found
 end
 
 function testAssertTableContainsWrongTypeInNumber()
-    lu.assertTableContains(simpleArray, "30")  -- Should fail: "30" (string) vs 30 (number)
+    -- Should fail: "30" (string) vs 30 (number) - use pcall to catch the error
+    local success, err = pcall(lu.assertTableContains, simpleArray, "30")
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertTableContainsWrongTypeInString()
-    lu.assertTableContains(stringArray, 123)  -- Should fail: number in string array
+    -- Should fail: number in string array - use pcall to catch the error
+    local success, err = pcall(lu.assertTableContains, stringArray, 123)
+    lu.assertFalse(success)  -- Should fail due to type mismatch
 end
 
 function testAssertTableContainsInEmptyArray()
-    lu.assertTableContains({}, "anything")  -- Should fail: empty array has no elements
+    -- Should fail: empty array has no elements - use pcall to catch the error
+    local success, err = pcall(lu.assertTableContains, {}, "anything")
+    lu.assertFalse(success)  -- Should fail because array is empty
 end
 
 function testAssertTableContainsNilValue()
-    lu.assertTableContains(simpleArray, nil)  -- Should fail: nil value
+    -- Should fail: nil value - use pcall to catch the error
+    local success, err = pcall(lu.assertTableContains, simpleArray, nil)
+    lu.assertFalse(success)  -- Should fail because nil not in array
 end
 
 function testAssertTableContainsNonTable()
-    lu.assertTableContains("not a table", "value")  -- Should fail: string is not a table (works correctly)
+    -- Should fail: string is not a table (works correctly) - use pcall to catch the error
+    local success, err = pcall(lu.assertTableContains, "not a table", "value")
+    lu.assertFalse(success)  -- Should fail due to non-table argument
 end
 
 function testAssertTableContainsNilTable()
-    lu.assertTableContains(nil, "value")  -- Should fail: nil is not a table (works correctly)
+    -- Should fail: nil is not a table (works correctly) - use pcall to catch the error
+    local success, err = pcall(lu.assertTableContains, nil, "value")
+    lu.assertFalse(success)  -- Should fail due to nil table argument
 end
 
 -- =======================================
@@ -326,35 +360,51 @@ function testAssertNotTableContainsComplexTable()
 end
 
 function testAssertNotTableContainsExistingNumber()
-    lu.assertNotTableContains(simpleArray, existingNumber)  -- Should fail: 30 exists
+    -- Should fail: 30 exists - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTableContains, simpleArray, existingNumber)
+    lu.assertFalse(success)  -- Should fail because value exists
 end
 
 function testAssertNotTableContainsExistingString()
-    lu.assertNotTableContains(stringArray, existingString)  -- Should fail: "banana" exists
+    -- Should fail: "banana" exists - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTableContains, stringArray, existingString)
+    lu.assertFalse(success)  -- Should fail because value exists
 end
 
 function testAssertNotTableContainsFirstElement()
-    lu.assertNotTableContains(simpleArray, 10)  -- Should fail: 10 is first element
+    -- Should fail: 10 is first element - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTableContains, simpleArray, 10)
+    lu.assertFalse(success)  -- Should fail because first element exists
 end
 
 function testAssertNotTableContainsLastElement()
-    lu.assertNotTableContains(simpleArray, 50)  -- Should fail: 50 is last element
+    -- Should fail: 50 is last element - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTableContains, simpleArray, 50)
+    lu.assertFalse(success)  -- Should fail because last element exists
 end
 
 function testAssertNotTableContainsBooleanTrue()
-    lu.assertNotTableContains(booleanArray, true)  -- Should fail: true exists in boolean array
+    -- Should fail: true exists in boolean array - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTableContains, booleanArray, true)
+    lu.assertFalse(success)  -- Should fail because true exists
 end
 
 function testAssertNotTableContainsBooleanFalse()
-    lu.assertNotTableContains(booleanArray, false)  -- Should fail: false exists in boolean array
+    -- Should fail: false exists in boolean array - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTableContains, booleanArray, false)
+    lu.assertFalse(success)  -- Should fail because false exists
 end
 
 function testAssertNotTableContainsFloatInMixed()
-    lu.assertNotTableContains(mixedArray, existingFloat)  -- Should fail: 3.14 exists in mixed array
+    -- Should fail: 3.14 exists in mixed array - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTableContains, mixedArray, existingFloat)
+    lu.assertFalse(success)  -- Should fail because float exists
 end
 
 function testAssertNotTableContainsStringInMixed()
-    lu.assertNotTableContains(mixedArray, "hello")  -- Should fail: "hello" exists in mixed array
+    -- Should fail: "hello" exists in mixed array - use pcall to catch the error
+    local success, err = pcall(lu.assertNotTableContains, mixedArray, "hello")
+    lu.assertFalse(success)  -- Should fail because string exists
 end
 
 function testAssertNotTableContainsNonTable()

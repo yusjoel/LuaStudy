@@ -74,27 +74,39 @@ function testAssertIsNaNWithLogNegative()
 end
 
 function testAssertIsNaNWithRegularNumber()
-    lu.assertIsNaN(regularFloat)  -- Should fail: 3.14159 is not NaN
+    -- Should fail: 3.14159 is not NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNaN, regularFloat)
+    lu.assertFalse(success)  -- Should fail because value is not NaN
 end
 
 function testAssertIsNaNWithPositiveInfinity()
-    lu.assertIsNaN(posInf1)  -- Should fail: math.huge is infinity, not NaN
+    -- Should fail: math.huge is infinity, not NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNaN, posInf1)
+    lu.assertFalse(success)  -- Should fail because infinity is not NaN
 end
 
 function testAssertIsNaNWithNegativeInfinity()
-    lu.assertIsNaN(negInf1)  -- Should fail: -math.huge is infinity, not NaN
+    -- Should fail: -math.huge is infinity, not NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNaN, negInf1)
+    lu.assertFalse(success)  -- Should fail because negative infinity is not NaN
 end
 
 function testAssertIsNaNWithZero()
-    lu.assertIsNaN(posZero)  -- Should fail: 0.0 is not NaN
+    -- Should fail: 0.0 is not NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNaN, posZero)
+    lu.assertFalse(success)  -- Should fail because zero is not NaN
 end
 
 function testAssertIsNaNWithInteger()
-    lu.assertIsNaN(regularInt)  -- Should fail: 42 is not NaN
+    -- Should fail: 42 is not NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNaN, regularInt)
+    lu.assertFalse(success)  -- Should fail because integer is not NaN
 end
 
 function testAssertIsNaNWithString()
-    lu.assertIsNaN(stringNaN)  -- Should fail: "NaN" is a string, not NaN
+    -- Should fail: "NaN" is a string, not NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertIsNaN, stringNaN)
+    lu.assertFalse(success)  -- Should fail because string is not NaN
 end
 
 -- =======================================
@@ -130,11 +142,15 @@ function testAssertNotIsNaNWithSmallNumber()
 end
 
 function testAssertNotIsNaNWithNaNValue()
-    lu.assertNotIsNaN(nanValue1)  -- Should fail: 0/0 is NaN
+    -- Should fail: 0/0 is NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsNaN, nanValue1)
+    lu.assertFalse(success)  -- Should fail because value is NaN
 end
 
 function testAssertNotIsNaNWithSqrtNegative()
-    lu.assertNotIsNaN(nanValue2)  -- Should fail: sqrt(-1) is NaN
+    -- Should fail: sqrt(-1) is NaN - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsNaN, nanValue2)
+    lu.assertFalse(success)  -- Should fail because value is NaN
 end
 
 function testAssertNotIsNaNWithString()
@@ -170,19 +186,27 @@ function testAssertIsInfWithLargeExp()
 end
 
 function testAssertIsInfWithRegularNumber()
-    lu.assertIsInf(regularFloat)  -- Should fail: 3.14159 is not infinity
+    -- Should fail: 3.14159 is not infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsInf, regularFloat)
+    lu.assertFalse(success)  -- Should fail because value is not infinity
 end
 
 function testAssertIsInfWithNaN()
-    lu.assertIsInf(nanValue1)  -- Should fail: NaN is not infinity
+    -- Should fail: NaN is not infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsInf, nanValue1)
+    lu.assertFalse(success)  -- Should fail because NaN is not infinity
 end
 
 function testAssertIsInfWithZero()
-    lu.assertIsInf(posZero)  -- Should fail: 0.0 is not infinity
+    -- Should fail: 0.0 is not infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsInf, posZero)
+    lu.assertFalse(success)  -- Should fail because zero is not infinity
 end
 
 function testAssertIsInfWithString()
-    lu.assertIsInf(stringInf)  -- Should fail: "Infinity" is a string, not infinity
+    -- Should fail: "Infinity" is a string, not infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsInf, stringInf)
+    lu.assertFalse(success)  -- Should fail because string is not infinity
 end
 
 -- =======================================
@@ -202,23 +226,33 @@ function testAssertIsPlusInfWithLargeExp()
 end
 
 function testAssertIsPlusInfWithNegativeInfinity()
-    lu.assertIsPlusInf(negInf1)  -- Should fail: -math.huge is negative infinity, not positive
+    -- Should fail: -math.huge is negative infinity, not positive - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusInf, negInf1)
+    lu.assertFalse(success)  -- Should fail because negative infinity is not positive infinity
 end
 
 function testAssertIsPlusInfWithNegOneDivZero()
-    lu.assertIsPlusInf(negInf2)  -- Should fail: -1/0 is negative infinity, not positive
+    -- Should fail: -1/0 is negative infinity, not positive - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusInf, negInf2)
+    lu.assertFalse(success)  -- Should fail because negative infinity is not positive infinity
 end
 
 function testAssertIsPlusInfWithRegularNumber()
-    lu.assertIsPlusInf(regularFloat)  -- Should fail: 3.14159 is not positive infinity
+    -- Should fail: 3.14159 is not positive infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusInf, regularFloat)
+    lu.assertFalse(success)  -- Should fail because regular number is not infinity
 end
 
 function testAssertIsPlusInfWithNaN()
-    lu.assertIsPlusInf(nanValue1)  -- Should fail: NaN is not positive infinity
+    -- Should fail: NaN is not positive infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusInf, nanValue1)
+    lu.assertFalse(success)  -- Should fail because NaN is not positive infinity
 end
 
 function testAssertIsPlusInfWithZero()
-    lu.assertIsPlusInf(posZero)  -- Should fail: 0.0 is not positive infinity
+    -- Should fail: 0.0 is not positive infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusInf, posZero)
+    lu.assertFalse(success)  -- Should fail because zero is not positive infinity
 end
 
 -- =======================================
@@ -238,23 +272,33 @@ function testAssertIsMinusInfWithLogZero()
 end
 
 function testAssertIsMinusInfWithPositiveInfinity()
-    lu.assertIsMinusInf(posInf1)  -- Should fail: math.huge is positive infinity, not negative
+    -- Should fail: math.huge is positive infinity, not negative - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusInf, posInf1)
+    lu.assertFalse(success)  -- Should fail because positive infinity is not negative infinity
 end
 
 function testAssertIsMinusInfWithOneDivZero()
-    lu.assertIsMinusInf(posInf2)  -- Should fail: 1/0 is positive infinity, not negative
+    -- Should fail: 1/0 is positive infinity, not negative - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusInf, posInf2)
+    lu.assertFalse(success)  -- Should fail because positive infinity is not negative infinity
 end
 
 function testAssertIsMinusInfWithRegularNumber()
-    lu.assertIsMinusInf(regularNegative)  -- Should fail: -2.71828 is not negative infinity
+    -- Should fail: -2.71828 is not negative infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusInf, regularNegative)
+    lu.assertFalse(success)  -- Should fail because regular negative number is not negative infinity
 end
 
 function testAssertIsMinusInfWithNaN()
-    lu.assertIsMinusInf(nanValue1)  -- Should fail: NaN is not negative infinity
+    -- Should fail: NaN is not negative infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusInf, nanValue1)
+    lu.assertFalse(success)  -- Should fail because NaN is not negative infinity
 end
 
 function testAssertIsMinusInfWithZero()
-    lu.assertIsMinusInf(posZero)  -- Should fail: 0.0 is not negative infinity
+    -- Should fail: 0.0 is not negative infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusInf, posZero)
+    lu.assertFalse(success)  -- Should fail because zero is not negative infinity
 end
 
 -- =======================================
@@ -282,11 +326,15 @@ function testAssertNotIsPlusInfWithLogZero()
 end
 
 function testAssertNotIsPlusInfWithPositiveInfinity()
-    lu.assertNotIsPlusInf(posInf1)  -- Should fail: math.huge is positive infinity
+    -- Should fail: math.huge is positive infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsPlusInf, posInf1)
+    lu.assertFalse(success)  -- Should fail because math.huge is positive infinity
 end
 
 function testAssertNotIsPlusInfWithOneDivZero()
-    lu.assertNotIsPlusInf(posInf2)  -- Should fail: 1/0 is positive infinity
+    -- Should fail: 1/0 is positive infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsPlusInf, posInf2)
+    lu.assertFalse(success)  -- Should fail because 1/0 is positive infinity
 end
 
 -- =======================================
@@ -314,11 +362,15 @@ function testAssertNotIsMinusInfWithOneDivZero()
 end
 
 function testAssertNotIsMinusInfWithNegativeInfinity()
-    lu.assertNotIsMinusInf(negInf1)  -- Should fail: -math.huge is negative infinity
+    -- Should fail: -math.huge is negative infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsMinusInf, negInf1)
+    lu.assertFalse(success)  -- Should fail because -math.huge is negative infinity
 end
 
 function testAssertNotIsMinusInfWithLogZero()
-    lu.assertNotIsMinusInf(negInf3)  -- Should fail: log(0) is negative infinity
+    -- Should fail: log(0) is negative infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsMinusInf, negInf3)
+    lu.assertFalse(success)  -- Should fail because log(0) is negative infinity
 end
 
 -- =======================================
@@ -350,15 +402,21 @@ function testAssertNotIsInfWithSmallNumber()
 end
 
 function testAssertNotIsInfWithPositiveInfinity()
-    lu.assertNotIsInf(posInf1)  -- Should fail: math.huge is infinity
+    -- Should fail: math.huge is infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsInf, posInf1)
+    lu.assertFalse(success)  -- Should fail because math.huge is infinity
 end
 
 function testAssertNotIsInfWithNegativeInfinity()
-    lu.assertNotIsInf(negInf1)  -- Should fail: -math.huge is infinity
+    -- Should fail: -math.huge is infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsInf, negInf1)
+    lu.assertFalse(success)  -- Should fail because negative infinity is still infinity
 end
 
 function testAssertNotIsInfWithOneDivZero()
-    lu.assertNotIsInf(posInf2)  -- Should fail: 1/0 is infinity
+    -- Should fail: 1/0 is infinity - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsInf, posInf2)
+    lu.assertFalse(success)  -- Should fail because 1/0 is positive infinity
 end
 
 -- =======================================
@@ -382,19 +440,27 @@ function testAssertIsPlusZeroWithIntegerZero()
 end
 
 function testAssertIsPlusZeroWithNegativeZero()
-    lu.assertIsPlusZero(negZero)  -- Should fail: -0.0 is negative zero, not positive
+    -- Should fail: -0.0 is negative zero, not positive - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusZero, negZero)
+    lu.assertFalse(success)  -- Should fail because negative zero is not positive zero
 end
 
 function testAssertIsPlusZeroWithRegularNumber()
-    lu.assertIsPlusZero(regularFloat)  -- Should fail: 3.14159 is not zero
+    -- Should fail: 3.14159 is not zero - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusZero, regularFloat)
+    lu.assertFalse(success)  -- Should fail because regular number is not zero
 end
 
 function testAssertIsPlusZeroWithNaN()
-    lu.assertIsPlusZero(nanValue1)  -- Should fail: NaN is not positive zero
+    -- Should fail: NaN is not positive zero - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusZero, nanValue1)
+    lu.assertFalse(success)  -- Should fail because NaN is not zero
 end
 
 function testAssertIsPlusZeroWithInfinity()
-    lu.assertIsPlusZero(posInf1)  -- Should fail: infinity is not positive zero
+    -- Should fail: infinity is not positive zero - use pcall to catch the error
+    local success, err = pcall(lu.assertIsPlusZero, posInf1)
+    lu.assertFalse(success)  -- Should fail because infinity is not zero
 end
 
 -- =======================================
@@ -406,23 +472,33 @@ function testAssertIsMinusZeroWithNegativeZero()
 end
 
 function testAssertIsMinusZeroWithPositiveZero()
-    lu.assertIsMinusZero(posZero)  -- Should fail: 0.0 is positive zero, not negative
+    -- Should fail: 0.0 is positive zero, not negative - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusZero, posZero)
+    lu.assertFalse(success)  -- Should fail because positive zero is not negative zero
 end
 
 function testAssertIsMinusZeroWithRegularNumber()
-    lu.assertIsMinusZero(regularNegative)  -- Should fail: -2.71828 is not zero
+    -- Should fail: -2.71828 is not zero - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusZero, regularNegative)
+    lu.assertFalse(success)  -- Should fail because regular number is not zero
 end
 
 function testAssertIsMinusZeroWithNaN()
-    lu.assertIsMinusZero(nanValue1)  -- Should fail: NaN is not negative zero
+    -- Should fail: NaN is not negative zero - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusZero, nanValue1)
+    lu.assertFalse(success)  -- Should fail because NaN is not zero
 end
 
 function testAssertIsMinusZeroWithInfinity()
-    lu.assertIsMinusZero(negInf1)  -- Should fail: negative infinity is not negative zero
+    -- Should fail: negative infinity is not negative zero - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusZero, negInf1)
+    lu.assertFalse(success)  -- Should fail because infinity is not zero
 end
 
 function testAssertIsMinusZeroWithIntegerZero()
-    lu.assertIsMinusZero(regularZeroInt)  -- Should fail: 0 is positive zero, not negative
+    -- Should fail: 0 is positive zero, not negative - use pcall to catch the error
+    local success, err = pcall(lu.assertIsMinusZero, regularZeroInt)
+    lu.assertFalse(success)  -- Should fail because integer zero is positive zero
 end
 
 -- =======================================
@@ -450,11 +526,15 @@ function testAssertNotIsPlusZeroWithNegativeNumber()
 end
 
 function testAssertNotIsPlusZeroWithPositiveZero()
-    lu.assertNotIsPlusZero(posZero)  -- Should fail: 0.0 is positive zero
+    -- Should fail: 0.0 is positive zero - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsPlusZero, posZero)
+    lu.assertFalse(success)  -- Should fail because 0.0 is positive zero
 end
 
 function testAssertNotIsPlusZeroWithZeroFromCalc()
-    lu.assertNotIsPlusZero(zeroFromCalc)  -- Should fail: 1.0 - 1.0 is positive zero
+    -- Should fail: 1.0 - 1.0 is positive zero - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsPlusZero, zeroFromCalc)
+    lu.assertFalse(success)  -- Should fail because calculation result is positive zero
 end
 
 -- =======================================
@@ -486,7 +566,9 @@ function testAssertNotIsMinusZeroWithIntegerZero()
 end
 
 function testAssertNotIsMinusZeroWithNegativeZero()
-    lu.assertNotIsMinusZero(negZero)  -- Should fail: -0.0 is negative zero
+    -- Should fail: -0.0 is negative zero - use pcall to catch the error
+    local success, err = pcall(lu.assertNotIsMinusZero, negZero)
+    lu.assertFalse(success)  -- Should fail because -0.0 is negative zero
 end
 
 -- Run the tests
